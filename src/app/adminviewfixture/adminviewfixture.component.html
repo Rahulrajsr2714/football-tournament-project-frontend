@@ -1,0 +1,48 @@
+<app-adminupdatepoint
+*ngIf='showUpdateModal'
+[match]='updatePointMatch'
+(close)="disableModal()"
+(editted)="fetchFixture()"
+></app-adminupdatepoint>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 offset-md-1" *ngIf="matches">
+      <h3 class="text-center mb-3">Match Fixture</h3>
+      <table class="table" *ngIf="matches.length>0 && matches">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Team A</th>
+            <th scope="col">Team B</th>
+            <th scope="col">Venue</th>
+            <th scope="col">Date</th>
+            <th scope="col">Team A pts</th>
+            <th scope="col">Team B pts</th>
+            <th scope="col">Update points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let match of matches;index as i">
+            <td>{{match.team_a.name}}</td>
+            <td>{{match.team_b.name}}</td>
+            <td>{{match.venue}}</td>
+            <td>{{match.date | date: 'MMMM d, y'}}</td>
+            <td>{{match.team_a_points == null ? '-' : match.team_a_points}}</td>
+            <td>{{match.team_b_points == null ? '-':match.team_b_points}}</td>
+            <td><button (click)="showPointsUpdateModal(match)" class="btn btn-warning">
+              Update
+            </button></td>
+          </tr>
+        </tbody>
+      </table>
+      <app-pagination
+      *ngIf="matches.length>0 && matches"
+      [paginationData]='paginationData'
+      (pageNumberEmitter)="fetchPaginatedResult($event)">
+      </app-pagination>
+      <div *ngIf="matches.length<=0 || !matches" class="alert alert-warning">
+        Fixture not yet generated
+      </div>
+    </div>
+  </div>
+</div>

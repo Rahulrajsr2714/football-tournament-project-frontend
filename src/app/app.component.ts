@@ -1,4 +1,7 @@
+import { Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,27 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'footballfrontend';
+  private userSub: Subscription;
+  constructor(private authService: AuthService,private router:Router) {}
+  isLoggedIn = null;
+
+  ngOnInit(): void {
+    this.authService.autoLogin();
+    this.userSub = this.authService.user.subscribe((user) => {
+      if (user === null) {
+        this.isLoggedIn = false;
+      } else {
+        this.isLoggedIn = true;
+        this.router.navigateByUrl('admin/list-teams')
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
+  }
+
+  onLogout() {
+    this.authService.logout();
+  }
 }

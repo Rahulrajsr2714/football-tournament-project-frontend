@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="row">
+    <div *ngIf="teamCount != 10" class="col-md-8 offset-md-2">
+      <div  class="alert alert-primary">
+        {{"Slots Left :" + (10-teamCount)}}
+      </div>
+      <h3 class="text-center mb-3">Add team</h3>
+      <div *ngIf="successMessage" class="alert alert-success">
+        {{ successMessage }}
+      </div>
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+      <form #addTeamForm="ngForm" (ngSubmit)="submitAddTeamForm(addTeamForm.value,addTeamForm)">
+        <div class="form-group">
+          <label for="teamname">Team name</label>
+          <input
+            ngModel
+            type="text"
+            id="teamname"
+            name="teamname"
+            class="form-control"
+            required
+            #teamname="ngModel"
+          />
+          <span
+            *ngIf="teamname.invalid && teamname.touched"
+            class="text-danger help-block"
+          >
+          Teamname field is required
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="players">Players(Enter as comma seperated)</label>
+          <input
+            ngModel
+            type="text"
+            id="players"
+            name="players"
+            class="form-control"
+            required
+            #players="ngModel"
+          />
+          <span
+            *ngIf="players.invalid && players.touched"
+            class="text-danger help-block"
+          >
+          Enter atleast one team member
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="coachname">Coach name</label>
+          <input
+            ngModel
+            type="text"
+            id="coachname"
+            name="coachname"
+            class="form-control"
+            required
+            #coachname="ngModel"
+          />
+          <span
+            *ngIf="coachname.invalid && coachname.touched"
+            class="text-danger help-block"
+          >
+          Coach name is required
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="managername">Manager name</label>
+          <input
+            ngModel
+            type="text"
+            id="managername"
+            name="managername"
+            class="form-control"
+            required
+            #managername="ngModel"
+          />
+          <span
+            *ngIf="managername.invalid && managername.touched"
+            class="text-danger help-block"
+          >
+          Manager name is required
+          </span>
+        </div>
+        <div>
+          <button [disabled]="addTeamForm.invalid" class="btn btn-success float-right">
+            Add Team
+          </button>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="teamCount >= 10" class="col-md-8 offset-md-2">
+      <div style="text-align: center;" class="alert alert-primary">
+        Teams for this round has already been registered try next time
+      </div>
+      <div style="text-align: center;">
+        <button routerLink="/" class="btn btn-success">
+          View fixture
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

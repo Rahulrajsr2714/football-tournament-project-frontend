@@ -1,0 +1,38 @@
+<div class="backdrop" (click)="onClose()"></div>
+<div class="alert-box">
+  <form #updatePoint="ngForm" (ngSubmit)="onUpdatePoint(updatePoint.value)">
+    <h3>{{match.team_a.name +" VS "+ match.team_b.name}}</h3>
+    <div class="form-group">
+      <label>{{"Points for "+match.team_a.name}}</label>
+      <input
+        #teamaPoint="ngModel"
+        [(ngModel)]="match.team_a_points"
+        type="text"
+        class="form-control"
+        name="teamaPoint"
+      />
+      <span *ngIf="teamaPoint.touched && teamaPoint.invalid" class="text-danger"
+        >Enter a numerical value</span
+      >
+    </div>
+    <div class="form-group">
+      <label>{{"Points for "+match.team_b.name}}</label>
+      <input
+        #teambPoint="ngModel"
+        [(ngModel)]="match.team_b_points"
+        type="text"
+        class="form-control"
+        name="teambPoint"
+      />
+      <span *ngIf="teambPoint.touched && teambPoint.invalid" class="text-danger"
+        >Enter a numerical value</span
+      >
+    </div>
+    <button [disabled]="updatePoint.invalid" class="btn btn-success mt-1">
+      Add points
+    </button>
+  </form>
+  <div class="alert-box-actions">
+    <button class="btn btn-primary" (click)="onClose()">Close</button>
+  </div>
+</div>
