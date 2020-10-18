@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div *ngIf="teamCount != 10" class="col-md-8 offset-md-2">
+    <div *ngIf="teamCount != 10" class="col-md-10 offset-md-1">
       <div  class="alert alert-primary">
         {{"Slots Left :" + (10-teamCount)}}
       </div>
@@ -92,7 +92,7 @@
         </div>
       </form>
     </div>
-    <div *ngIf="teamCount >= 10" class="col-md-8 offset-md-2">
+    <div *ngIf="teamCount >= 10" class="col-md-10 offset-md-1">
       <div style="text-align: center;" class="alert alert-primary">
         Teams for this round has already been registered try next time
       </div>

@@ -16,9 +16,11 @@
             <th scope="col">Team B</th>
             <th scope="col">Venue</th>
             <th scope="col">Date</th>
+            <th scope="col">Time</th>
             <th scope="col">Team A pts</th>
             <th scope="col">Team B pts</th>
             <th scope="col">Update points</th>
+
           </tr>
         </thead>
         <tbody>
@@ -27,6 +29,7 @@
             <td>{{match.team_b.name}}</td>
             <td>{{match.venue}}</td>
             <td>{{match.date | date: 'MMMM d, y'}}</td>
+            <td>{{match.time}}</td>
             <td>{{match.team_a_points == null ? '-' : match.team_a_points}}</td>
             <td>{{match.team_b_points == null ? '-':match.team_b_points}}</td>
             <td><button (click)="showPointsUpdateModal(match)" class="btn btn-warning">

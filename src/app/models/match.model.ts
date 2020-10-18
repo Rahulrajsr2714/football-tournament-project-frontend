@@ -8,6 +8,7 @@ export interface MatchFixture{
   };
   venue: string;
   date: string;
+  time:string;
   team_a_points: number;
   team_b_points: number;
 }
